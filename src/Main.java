@@ -27,10 +27,9 @@ public class Main {
         while (gameIsRunning) {
             for (Player player : players) {
                 System.out.println("Player " + player.getName() + " turn to play!");
-                System.out.print("press enter to roll dice");
+                System.out.print("Press enter to roll dice");
                 scanner.nextLine();
 
-                System.out.println();
                 int rolledDice = dice.roll();
                 System.out.println("\nPlayer " + player.getName() + " rolled " + rolledDice);
                 Piece pieceToMove = null;
@@ -38,26 +37,25 @@ public class Main {
                     if (piece.getStatus() == Status.AT_HOME && rolledDice == 6) {
                         pieceToMove = piece;
                         break;
-                    }
-                    else if (piece.getStatus() == Status.ON_BOARD)
-                    {
+                    } else if (piece.getStatus() == Status.ON_BOARD) {
                         pieceToMove = piece;
                         break;
                     }
                 }
 
                 if (pieceToMove != null) {
-                    System.out.println();
                     player.movePiece(pieceToMove, rolledDice);
-                    System.out.println();
-                    Piece pieces = pieceToMove;
-                    pieces.move(rolledDice);
-                    int col = pieces.getCurrentSquare().getPosition().getCol();
-                    int row = pieces.getCurrentSquare().getPosition().getRow();
-                    ludo[row][col - 1] = "|";
-                    ludo[row][col] = player.getColor().charAt(0) + " |";
+                    Square current = pieceToMove.getCurrentSquare();
+                    if (current != null) {
+                        int row = current.getPosition().getRow();
+                        int col = current.getPosition().getCol();
+                        if (row >= 0 && row < 15 && col >= 0 && col < 15) {
+                            ludo[row][col] = player.getColor().charAt(0) + " |";
+                        }
+                    }
                     displayBoard(ludo);
-                    ludo[row][col] = " |";
+                } else {
+                    System.out.println("No piece could move. Try again next turn.");
                 }
 
                 if (player.getWinStatus()) {
@@ -72,13 +70,13 @@ public class Main {
     }
 
     public static void displayBoard(String[][] board) {
-       StringBuilder builder = new StringBuilder();
-       for (int row = 0; row < board.length; row++) {
-           for (int col = 0; col < board[row].length; col++) {
-               builder.append(board[row][col]);
-           }
-           builder.append("\n");
-       }
-       System.out.println(builder.toString());
+        StringBuilder builder = new StringBuilder();
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                builder.append(board[row][col]);
+            }
+            builder.append("\n");
+        }
+        System.out.println(builder.toString());
     }
 }
