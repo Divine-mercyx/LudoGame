@@ -85,4 +85,8 @@ public class Board {
         }
     }
 
+    public List<Square> getSquares() {
+        return this.squares;
+    }
+
 }
