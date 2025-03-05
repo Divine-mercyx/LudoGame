@@ -1,4 +1,4 @@
-package ludoGame;
+package ludoUpdate;
 
 import java.util.Random;
 
