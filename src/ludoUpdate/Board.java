@@ -34,22 +34,28 @@ public class Board {
         }
     }
 
+
     public Square getStartingSquare(Player player) {
-        return startingSquare.get(player.getColor().toLowerCase());
+        String colorKey = player.getColor().toLowerCase();
+        if (!startingSquare.containsKey(colorKey)) {
+            System.out.println("Error: No starting square found for color " + colorKey);
+            return null;
+        }
+        return startingSquare.get(colorKey);
     }
 
-//    public int[] getSquareIndex(Square square) {
-//        for (int row = 0; row < this.squares.length; row++) {
-//            for (int col = 0; col < this.squares[row].length; col++) {
-//                if (square.equals(this.squares[row][col])) return new int[]{row, col};
-//            }
-//        }
-//        return new int[]{-1, -1};
-//    }
 
     public Square[][] getSquares() {
         return this.squares;
     }
 
+    public int[][] getSquareIndex(Square square) {
+        for (int row = 0; row < this.squares.length; row++) {
+            for (int col = 0; col < this.squares[row].length; col++) {
+                if (this.squares[row][col].equals(square)) return new int[][]{{row, col}};
+            }
+        }
+        return new int[][]{};
+    }
 
 }

@@ -15,7 +15,7 @@ public class Player {
         this.color = color;
         this.name = name;
         this.board = board;
-        pieces = new ArrayList<Piece>();
+        pieces = new ArrayList<>();
         initializePieces();
     }
 
@@ -39,5 +39,14 @@ public class Player {
 
     public String getColor() {
         return this.color;
+    }
+
+    public boolean hasWon() {
+        for (Piece piece : this.pieces) {
+            if (piece.getStatus() != Status.IS_FINISHED) {
+                return false;
+            }
+        }
+        return true;
     }
 }

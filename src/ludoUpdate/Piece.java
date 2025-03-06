@@ -17,9 +17,16 @@ public class Piece {
         if (this.status == Status.AT_HOME) {
             setCurrentSquareIfPlayerJustGotOut(steps);
         }
-//        else {
-//
-//        }
+        else {
+            moveOnBoard(steps);
+        }
+    }
+
+    private void setCurrentSquareSteps(int steps) {
+        if (this.status == Status.ON_BOARD) {
+            int[][] currentSquareIndex = this.board.getSquareIndex(this.currentSquare);
+            this.currentSquare.removePiece(this);
+        }
     }
 
     private void setCurrentSquareIfPlayerJustGotOut(int steps) {
@@ -51,6 +58,15 @@ public class Piece {
     }
 
     public void setCurrentSquare(Square currentSquare) { this.currentSquare = currentSquare; }
+
+
+
+
+    private void moveOnBoard(int steps) {
+//        for (int i = 0; i < steps; i++) {
+            this.currentSquare = getNextSquare(this.currentSquare);
+//        }
+    }
 
 
 }
