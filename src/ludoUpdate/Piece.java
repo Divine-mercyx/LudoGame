@@ -63,9 +63,9 @@ public class Piece {
 
 
     private void moveOnBoard(int steps) {
-//        for (int i = 0; i < steps; i++) {
-            this.currentSquare = getNextSquare(this.currentSquare);
-//        }
+        for (int i = 1; i <= steps; i++) {
+            this.currentSquare = this.board.getNextSquare(this.currentSquare, this.player.getColor().toLowerCase(), steps);
+        }
     }
 
 

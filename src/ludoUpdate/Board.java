@@ -58,4 +58,27 @@ public class Board {
         return new int[][]{};
     }
 
+    public Square getNextSquare(Square currentSquare, String color, int steps) {
+        int row = currentSquare.getPosition().getRow();
+        int col = currentSquare.getPosition().getCol();
+        if (color.equals("red")) {
+            if (row == 6 && col <= 6) {
+                col++;
+            }
+            if (row > 0 && col == 6) {
+                row--;
+            }
+            if (row == 0 && col <= 8) {
+                col++;
+            }
+            if (col == 8 && row <= 6) {
+                row++;
+            }
+        }
+
+
+
+        return getSquares()[row][col];
+    }
+
 }

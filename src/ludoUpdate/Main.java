@@ -16,7 +16,6 @@ public class Main {
             Arrays.fill(ludo[i], "|_|");
         }
 
-        displayBoard(ludo);
 
 
         Player player1 = new Player("red","divine", board);
@@ -25,6 +24,7 @@ public class Main {
         Player player4 = new Player("yellow", "leke", board);
 
         Player[] players = new Player[]{player1, player2, player3, player4};
+        displayBoard(ludo, players);
         boolean gameIsRunning = true;
 
         while (gameIsRunning) {
@@ -52,7 +52,7 @@ public class Main {
                     int row = pieceToMove.getCurrentSquare().getPosition().getRow();
                     int col = pieceToMove.getCurrentSquare().getPosition().getCol();
                     ludo[row][col] = "|" + player.getColor().charAt(0) + "|";
-                    displayBoard(ludo);
+                    displayBoard(ludo, players);
 
                     if (player.hasWon()) {
                         System.out.println("Player " + player.getName() + " has won the game!");
@@ -67,9 +67,10 @@ public class Main {
         scanner.close();
     }
 
-    public static void displayBoard(String[][] aboard) {
+    public static void displayBoard(String[][] aboard, Player[] players) {
         StringBuilder builder = new StringBuilder();
         String[][] board = printBoard(aboard);
+
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 builder.append(board[row][col]);
