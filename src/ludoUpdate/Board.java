@@ -58,34 +58,95 @@ public class Board {
         return new int[][]{};
     }
 
+
     public Square getNextSquare(Square currentSquare, String color, int steps) {
         int row = currentSquare.getPosition().getRow();
         int col = currentSquare.getPosition().getCol();
-        if (color.equals("red")) {
 
-            if (row == 6 && col <= 6) col++;
+        for (int i = 0; i < steps; i++) {
+                if (row == 6 && col < 6) {
+                    col++;
+                    if (col == 6) {
+                        row--;
+                    }
+                } else if (col == 6 && row > 0) {
+                    row--;
+                    if (row == 8) {
+                        col--;
+                    }
+                }
 
-            if (col == 6 && row > 0) {
-                row--;
-            }
+                else if (row == 0 && col < 8) {
+                    col++;
+                } else if (col == 8 && row < 6) {
+                    row++;
+                    if (row == 6) {
+                        col++;
+                    }
+                } else if (row == 6 && col < 14) {
+                    col++;
+                }
 
-            if (row == 0 && col < 9) {
-                col++;
-            }
+                else if (col == 14 && row < 8) {
+                    row++;
+                }
+
+                else if (row == 8 && col > 8) {
+                    col--;
+                    if (col == 8) {
+                        row++;
+                    }
+                }
+
+                else if (col == 8 && row < 14) {
+                    row++;
+                }
+
+                else if (row == 14 && col > 6) {
+                    col--;
+                }
+
+
+                else if (row == 8 && col > 0) {
+                    col--;
+                }
+
+
+                else if (col == 0 && row > 0) {
+                    row--;
+                }
+
+                if (color.equals("red")) {
+                    if (row == 7 && col < 6) {
+                        col++;
+                    }
+                }
+
+                if (color.equals("green")) {
+                    if (col == 7 && row < 6) {
+                        row++;
+                    }
+                }
+
+
+//                if (color.equals("blue")) {
+//                    if (row == 7 && col <= 13) {
+//                        col--;
+//                    }
+//                }
 //
-//
-            if (col == 8 && row <= 6) {
-                row++;
-            }
-//
-//            else if (row == 6 && col < 14) {
-//                col++;
-//            }
+//                if (color.equals("yellow")) {
+//                    if (col == 7 && row <= 13) {
+//                        row--;
+//                    }
+//                }
+
+
         }
-
-
 
         return getSquares()[row][col];
     }
+
+
 
 }

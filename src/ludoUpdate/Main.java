@@ -48,18 +48,30 @@ public class Main {
                 }
 
                 if (pieceToMove != null) {
+                    if (pieceToMove.getStatus() == Status.IS_FINISHED) continue;
+
+                    int prevRow = pieceToMove.getCurrentSquare().getPosition().getRow();
+                    int prevCol = pieceToMove.getCurrentSquare().getPosition().getCol();
+
                     player.movePiece(pieceToMove, rolledDice);
+
                     int row = pieceToMove.getCurrentSquare().getPosition().getRow();
                     int col = pieceToMove.getCurrentSquare().getPosition().getCol();
+
+                    if (!(prevRow == 0 && prevCol == 0)) {
+                        ludo[prevRow][prevCol] = "|_|";
+                    }
                     ludo[row][col] = "|" + player.getColor().charAt(0) + "|";
                     displayBoard(ludo, players);
+                    System.out.println("position: row " + row + " col " + col);
 
                     if (player.hasWon()) {
                         System.out.println("Player " + player.getName() + " has won the game!");
                         gameIsRunning = false;
                         break;
                     }
-                } else {
+                }
+                else {
                     System.out.println("No piece could move. Try again next turn.");
                 }
             }

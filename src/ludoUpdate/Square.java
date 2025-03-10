@@ -11,7 +11,7 @@ public class Square {
     public Square(Position position, boolean isSafe) {
         this.position = position;
         this.isSafe = isSafe;
-        this.occupyingPieces = new ArrayList<Piece>();
+        this.occupyingPieces = new ArrayList<>();
     }
 
     public void setSafe(boolean isSafe) {
@@ -40,15 +40,10 @@ public class Square {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+        if (obj instanceof Square square) {
+            return this.isSafe == square.isSafe && this.position.equals(square.position);
         }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        Square square = (Square) obj;
-        return this.isSafe == square.isSafe && this.position.equals(square.position);
+        return false;
     }
 
 

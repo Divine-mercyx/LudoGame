@@ -17,10 +17,18 @@ public class Position {
         return col;
     }
 
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Position p) {
-            return p.row == this.row && p.col == this.col;
+        if (obj instanceof Position position) {
+            return position.row == this.row && position.col == this.col;
         }
         return false;
     }
